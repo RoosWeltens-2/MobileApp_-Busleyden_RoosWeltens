@@ -1,34 +1,28 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import HomeScreen from "./screens/HomeScreen";
+import ProductDetail from "./screens/ProductDetail";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Busleeyden Atheneum</Text>
-      <Text style={styles.subtitle}>Eén school, acht campussen.</Text>
-      <StatusBar style="light" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ title: "Busleyden Atheneum" }}
+        />
+
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetail}
+          options={{ title: "Product detail" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#0B2D5C",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 24,
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  subtitle: {
-    color: "#F5A623",
-    fontSize: 18,
-    marginTop: 12,
-    textAlign: "center",
-  },
-});
