@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "./screens/HomeScreen";
 import ProductDetail from "./screens/ProductDetail";
+import CampusDetail from "./screens/CampusDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ export default function App() {
           name="ProductDetail"
           component={ProductDetail}
           options={{ title: "Product detail" }}
+        />
+        <Stack.Screen
+          name="CampusDetail"
+          component={CampusDetail}
+          options={{title: "Campus detail"}}
         />
       </Stack.Navigator>
     </NavigationContainer>

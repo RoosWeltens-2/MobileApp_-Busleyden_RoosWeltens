@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useEffect, useState } from "react";
+import CampusCard from "../components/CampusCard";
 
 const PRODUCTS_URL =
   "https://api.webflow.com/v2/sites/6a143c8a0e7440c6e5727010/products";
@@ -91,7 +92,7 @@ export default function HomeScreen({ navigation }) {
         return {
           id: item.id,
           title: fieldData.name || "Geen titel",
-          description: fieldData ["lange-beschrijving"]  || "",
+          description: fieldData ["paragraph"]  || "",
         };
       });
 
@@ -117,7 +118,7 @@ export default function HomeScreen({ navigation }) {
           return {
             id: item.id,
             title: fieldData.name || "Geen titel",
-            description: fieldData["lange-beschrijving"] || "",
+            description: fieldData["beschrijving"] || "",
           };
         });
   
@@ -143,7 +144,7 @@ export default function HomeScreen({ navigation }) {
         return {
           id: item.id,
           title: fieldData.name || "Geen titel",
-          description: fieldData["lange-beschrijving"] || "",
+          description: fieldData["informatie"] || "",
         };
       });
 
@@ -171,13 +172,12 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.sectionIntro}>
           Ontdek onze acht campussen verspreid over Mechelen.</Text>
           {campussen.map((campus) => (
-            <View key={campus.id} style={styles.card}>
-              <Text style ={styles.cardTitle}>{campus.title}</Text>
-              {campus.description !== "" && (
-                <Text style={styles.cardText} numberOfLines={3}>
-                  {campus.description}
-                </Text>)}
-            </View>
+            <CampusCard
+              key={campus.id}
+              title={campus.title}
+              description={campus.description}
+              onPress={() => navigation.navigate("CampusDetail", {campus})}
+            />
           ))}
 
           {campussen.length === 0 && (
