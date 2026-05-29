@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductDetail from "./screens/ProductDetail";
 import CampusDetail from "./screens/CampusDetail";
 import NieuwsDetail from "./screens/NieuwsDetail"; 
+import RichtingDetail from "./screens/RichtingDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,11 @@ export default function App() {
         name="NieuwsDetail"
         component={NieuwsDetail}
         options={{title: "Nieuws detail"}}
+        />
+        <Stack.Screen
+        name="RichtingDetail"
+        component={RichtingDetail}
+        options={{title: "Richting detail"}}
         />
       </Stack.Navigator>
     </NavigationContainer>

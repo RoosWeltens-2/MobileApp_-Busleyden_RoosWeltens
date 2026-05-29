@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import CampusCard from "../components/CampusCard";
 import NieuwsCard from "../components/NieuwsCard";
+import RichtingCard from "../components/RichtingCard";
 
 const PRODUCTS_URL =
   "https://api.webflow.com/v2/sites/6a143c8a0e7440c6e5727010/products";
@@ -113,17 +114,23 @@ export default function HomeScreen({ navigation }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        const mappedRichtingen = (data.items || []).map((item) => {
+        const mappedRichtingens = (data.items || []).map((item) => {
           const fieldData = item.fieldData || {};
   
           return {
             id: item.id,
             title: fieldData.name || "Geen titel",
             description: fieldData["beschrijving"] || "",
+            image: 
+              fieldData["main-image"]?.url || 
+              fieldData.image?.url ||
+              fieldData.afbeelding?.url ||
+              fieldData.thumbnail?.url ||
+              "",
           };
         });
   
-        setRichtingen(mappedRichtingen);
+        setRichtingen(mappedRichtingens);
       })
       .catch((error) => console.error("Error fetching richtingen:", error));
   }, []);
@@ -192,14 +199,13 @@ export default function HomeScreen({ navigation }) {
           Kies uit onze studierichtingen die we aanbieden.</Text>  
 
         {richtingen.map((richting) => (
-          <View key ={richting.id} style={styles.card}>
-            <Text style={styles.cardTitle}>{richting.title}</Text>
-
-            {richting.description !== "" && (
-              <Text style={styles.cardText} numberOfLines={3}>
-                {richting.description}
-              </Text>)}
-          </View>
+          <RichtingCard
+                    key={richting.id}
+                    title={richting.title}
+                    description={richting.description}
+                    image={richting.image}
+                    onPress={() => navigation.navigate("RichtingDetail", {richting})}
+                  />
         ))}
 
         {richtingen.length === 0 && (
