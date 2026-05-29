@@ -16,7 +16,6 @@ export default function App() {
           component={HomeScreen}
           options={{ title: "Busleyden Atheneum" }}
         />
-
         <Stack.Screen
           name="ProductDetail"
           component={ProductDetail}
