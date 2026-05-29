@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import CampusCard from "../components/CampusCard";
+import NieuwsCard from "../components/NieuwsCard";
 
 const PRODUCTS_URL =
   "https://api.webflow.com/v2/sites/6a143c8a0e7440c6e5727010/products";
@@ -214,14 +215,12 @@ export default function HomeScreen({ navigation }) {
         </Text>
 
         {nieuws.map((nieuw) => (
-          <View key ={nieuw.id} style={styles.card}>
-            <Text style={styles.cardTitle}>{nieuw.title}</Text>
-
-            {nieuw.description !== "" && (
-              <Text style={styles.cardText} numberOfLines={3}>
-              {nieuw.description}
-              </Text>)}
-              </View>
+          <NieuwsCard
+            key={nieuw.id}
+            title={nieuw.title}
+            description={nieuw.description}
+            onPress={() => navigation.navigate("NieuwsDetail", {nieuws: nieuw})}
+          />
         ))}
 
         {nieuws.length === 0 && (
