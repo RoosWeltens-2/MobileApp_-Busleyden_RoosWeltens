@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import CampusCard from "../components/CampusCard";
 import NieuwsCard from "../components/NieuwsCard";
 import RichtingCard from "../components/RichtingCard";
+import ProductCard from "../components/ProductCard";
 
 const PRODUCTS_URL =
   "https://api.webflow.com/v2/sites/6a143c8a0e7440c6e5727010/products";
@@ -213,6 +214,9 @@ export default function HomeScreen({ navigation }) {
         )}
         </View>
 
+{/*}
+nieuws
+{*/}
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Nieuws</Text>
@@ -233,6 +237,35 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.mutedText}>Geen Nieuws gevonden</Text>
         )}
       </View>
+
+{/*}
+webshop
+{*/}
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Webshop</Text>
+        <Text style={styles.sectionIntro}>
+          Ontdek producten uit de Busleyden webshop.
+        </Text>
+
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            description={product.description}
+            image={product.image}
+            price={product.price}
+            onPress={() => navigation.navigate("ProductDetail", {product})}
+          />
+        ))}
+
+        {products.length === 0 && (
+          <Text style={styles.mutedText}>Geen producten gevonden</Text>
+        )}
+      </View>
+{/*}
+webshop
+
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Webshop</Text>
@@ -280,6 +313,7 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.mutedText}>Geen producten gevonden.</Text>
         )}
       </View>
+      */}
 
       <StatusBar style="light" />
     </ScrollView>
